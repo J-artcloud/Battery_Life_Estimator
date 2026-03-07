@@ -3,11 +3,15 @@ import joblib
 import numpy as np
 import pandas as pd
 import time
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent
+MODEL_PATH = BASE_DIR.parent / "models" / "model1.joblib"
 
 # --- Load The Model and Scaler ---
 @st.cache_resource
 def load_model():
-    model = joblib.load('../models/model1.joblib')
+    model = joblib.load(MODEL_PATH)
     #scaler = joblib.load('scaler.joblib')
     return model #,scaler
 
