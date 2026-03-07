@@ -7,7 +7,7 @@ import time
 # --- Load The Model and Scaler ---
 @st.cache_resource
 def load_model():
-    model = joblib.load('..\models\model1.joblib')
+    model = joblib.load('..\\models\\model1.joblib')
     #scaler = joblib.load('scaler.joblib')
     return model #,scaler
 
