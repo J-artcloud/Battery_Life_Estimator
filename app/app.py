@@ -24,7 +24,188 @@ st.set_page_config(
 )
 
 
-st.title('Battery life Estimator App 🔋')
+st.markdown("""
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+
+/* Global font */
+html, body, [class*="css"] {
+    font-family: 'Poppins', sans-serif;
+}
+
+/* App background */
+.stApp {
+    background: linear-gradient(135deg,#020617,#0f172a);
+    color:white;
+}
+
+/* Main Title */
+.main-title{
+    font-family: 'Orbitron', sans-serif;
+    font-size:60px;
+    font-weight:800;
+    text-align:center;
+    background: linear-gradient(90deg,#38bdf8,#22c55e);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom:5px;
+}
+
+/* Subtitle */
+.subtitle{
+    text-align:center;
+    font-size:18px;
+    color:#94a3b8;
+    margin-bottom:35px;
+}
+
+/* Sidebar */
+section[data-testid="stSidebar"]{
+    background:linear-gradient(180deg,#020617,#020617,#0f172a);
+    border-right:1px solid rgba(56,189,248,0.1);
+}
+
+/* Sidebar labels */
+section[data-testid="stSidebar"] label{
+    font-size:15px;
+    font-weight:500;
+    color:#38bdf8;
+}
+
+/* Inputs */
+.stSelectbox div[data-baseweb="select"]{
+    background:#020617;
+    border-radius:10px;
+    border:1px solid rgba(56,189,248,0.3);
+}
+
+/* Sliders */
+.stSlider > div{
+    color:#38bdf8;
+}
+
+/* Input container */
+.stSelectbox, .stSlider{
+    border-radius:10px;
+    padding:5px;
+}
+
+/* Buttons */
+.stButton>button{
+    background:linear-gradient(90deg,#38bdf8,#22c55e);
+    color:white;
+    font-size:18px;
+    font-weight:600;
+    border:none;
+    border-radius:12px;
+    padding:12px 30px;
+    transition:0.3s;
+    box-shadow:0px 0px 12px rgba(56,189,248,0.4);
+}
+
+.stButton>button:hover{
+    background:linear-gradient(90deg,#0ea5e9,#16a34a);
+    transform:scale(1.05);
+    box-shadow:0px 0px 20px rgba(34,197,94,0.6);
+}
+
+/* Prediction card */
+.prediction-result{
+    font-family: 'Orbitron', sans-serif;
+    font-size:34px;
+    text-align:center;
+    background:linear-gradient(90deg,#22c55e,#4ade80);
+    padding:22px;
+    border-radius:14px;
+    margin-top:25px;
+    color:black;
+    box-shadow:0px 0px 20px rgba(34,197,94,0.5);
+}
+
+/* Dataframe */
+[data-testid="stDataFrame"]{
+    border-radius:10px;
+}
+
+/* Battery container */
+.battery-container{
+    width:220px;
+    height:85px;
+    border:4px solid #38bdf8;
+    border-radius:12px;
+    position:relative;
+    margin:auto;
+    background:#020617;
+}
+
+/* Battery tip */
+.battery-container::after{
+    content:"";
+    position:absolute;
+    right:-14px;
+    top:26px;
+    width:12px;
+    height:32px;
+    background:#38bdf8;
+    border-radius:3px;
+}
+
+/* Battery level */
+.battery-level{
+    height:100%;
+    background:linear-gradient(90deg,#22c55e,#4ade80);
+    width:0%;
+    border-radius:8px;
+    transition:width 1.8s ease-in-out;
+    box-shadow:0px 0px 15px rgba(34,197,94,0.6);
+}
+
+/* Phone mockup */
+.phone{
+    width:230px;
+    height:430px;
+    border-radius:35px;
+    border:3px solid #1e293b;
+    background:#020617;
+    margin:auto;
+    padding:20px;
+    box-shadow:0px 0px 30px rgba(56,189,248,0.25);
+    position:relative;
+}
+
+/* Phone screen glow */
+.phone::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    border-radius:35px;
+    box-shadow:inset 0px 0px 25px rgba(56,189,248,0.1);
+}
+
+/* Battery text */
+.phone-battery{
+    font-size:34px;
+    text-align:center;
+    margin-top:140px;
+    font-family:'Orbitron',sans-serif;
+    color:#22c55e;
+}
+
+/* Glass card effect */
+.glass-card{
+    background:rgba(255,255,255,0.05);
+    border-radius:15px;
+    padding:20px;
+    backdrop-filter: blur(10px);
+    border:1px solid rgba(255,255,255,0.08);
+}
+
+</style>
+""", unsafe_allow_html=True)
+
+
+st.markdown("""<h1 class="title">Battery life Estimator App 🔋 </h1>""",unsafe_allow_html=True)
 st.header("Analyze how long your phone can stay on before going off")
 st.write(
     """
@@ -80,6 +261,16 @@ if st.sidebar.button("Predict Battery Life⚡ "):
         predicted_Battery_life = prediction[0] 
     
     st.markdown(f"<div class='prediction-result'>Predicted Battery Life: {predicted_Battery_life:,.2f}hrs</div>", unsafe_allow_html=True)
+    battery_percent = min(predicted_Battery_life * 10, 100)
 
+    st.markdown(f"""
+    <div class="battery-container">
+        <div class="battery-level" style="width:{battery_percent}%"></div>
+    </div>
 
+    <div class="phone-battery">
+    🔋 {predicted_Battery_life:.1f} hrs
+    </div>
+    """, unsafe_allow_html=True)
+   
 st.markdown("---")
