@@ -41,7 +41,7 @@ html, body, [class*="css"] {
 }
 
 /* Main Title */
-.main-title{
+.title{
     font-family: 'Orbitron', sans-serif;
     font-size:60px;
     font-weight:800;
@@ -49,7 +49,7 @@ html, body, [class*="css"] {
     background: linear-gradient(90deg,#38bdf8,#22c55e);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    margin-bottom:5px;
+    margin-bottom:25px;
 }
 
 /* Subtitle */
@@ -83,6 +83,11 @@ section[data-testid="stSidebar"] label{
 /* Sliders */
 .stSlider > div{
     color:#38bdf8;
+}
+
+#welcome-text{
+   text-align:center;
+   font-family:popins; 
 }
 
 /* Input container */
@@ -135,7 +140,7 @@ section[data-testid="stSidebar"] label{
     border:4px solid #38bdf8;
     border-radius:12px;
     position:relative;
-    margin:auto;
+    margin:20px auto;
     background:#020617;
 }
 
@@ -205,15 +210,14 @@ section[data-testid="stSidebar"] label{
 """, unsafe_allow_html=True)
 
 
-st.markdown("""<h1 class="title">Battery life Estimator App 🔋 </h1>""",unsafe_allow_html=True)
-st.header("Analyze how long your phone can stay on before going off")
-st.write(
+st.markdown("""<h2 class="title">Battery life Estimator App 🔋 </h2>""",unsafe_allow_html=True)
+# st.header("Analyze how long your phone can stay on before going off")
+st.markdown(
     """
-    This app predicts **how long a phone can stay on before going off** based on  differnt features of your phones.
-    Enter the details of your phone, and the model will estimate the how long your phone stays on.
-    This is based on a Linear Regression model trained on the phone_battery_dataset.
+    <div id="welcome-text">This app predicts <strong>how long a phone can stay on before going off</strong> based on  differnt features of your phones.
+    It uses a Linear Regression model trained on the phone_battery_dataset.</div>
     """
-)
+,unsafe_allow_html=True)
 st.markdown("---")
 
 # --- Sidebar ---
